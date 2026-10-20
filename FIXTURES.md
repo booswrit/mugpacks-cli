@@ -1,12 +1,12 @@
 # MUGEN-9: content fixtures and CLI acceptance-test contract
 
-Delivered independently of the CLI implementation (MUGEN-6/7/8) and of the
-code-destination resolution (MUGEN-5 comment 49033 — the `brooswit-mugen`
-org exists but has no repo yet). This directory is the actual deliverable;
-it is not yet committed to a repository because no authorized destination
-exists. Once one does, copy this directory in as-is and point the test
-harness described in `tests/acceptance/cli-acceptance.test.js` at the real
-CLI.
+Delivered independently of the CLI implementation (MUGEN-6/7/8). This is
+the published MUGEN-9 deliverable, landed in `brooswit-mugen/mugpacks-cli`
+via PR #1 (head `3a83f567e9253d16352fb766c52e702435bcf104`). The fixtures
+and acceptance-test contract are ready now; MUGEN-6/7/8 build the CLI
+against this repository, and MUGEN-10 points the test harness described
+in `tests/acceptance/cli-acceptance.test.js` at the real CLI once it
+exists, turning each `test.todo(...)` there into a real assertion.
 
 Built against the config/command/error contract from MUGEN-5 comment 49028
 (`mugpacks.yaml`, `installDir`, `items[].{id,type,url,subpath}`).
