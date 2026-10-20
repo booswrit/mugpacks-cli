@@ -39,7 +39,9 @@ test.todo('unsafe-archive-absolute-path.yaml is rejected before any file is writ
 test.todo('missing-subpath.yaml fails with \'error: item "fixture-fighter-a": subpath "fixture-fighter-a/" not found in downloaded archive\', exit code != 0');
 test.todo('corrupt-archive.yaml fails with a clear extraction/decompression error (not a stack trace), exit code != 0');
 
-test.todo('multi-item config where one item fails (e.g. one valid char + one download-failure item) still exits non-zero, prints one error line for the failed item, and does NOT install or register the item(s) that would have succeeded (fail fast, no partial mutation per MUGEN-5 contract)');
+test.todo('a config combining one otherwise-valid item with one item that fails VALIDATION (e.g. a duplicate id, caught before any download starts) fails before any item is downloaded, extracted, or installed -- installDir is left completely untouched, matching MUGEN-5 comment49028\'s "fail fast, no partial mutation on validation errors" guarantee');
+
+test.todo('multi-item config where one item fails at the download/transport stage (one valid char + one download-failure item, both past validation) exits non-zero and prints one error line naming the failed item id, per MUGEN-5 comment49028\'s per-item download/extract/install contract ("Exit 0 only if every item installed; otherwise non-zero with one error line per failed item"); this does not require rolling back the item that had already finished downloading/extracting/installing successfully -- global rollback-on-transport-failure atomicity is not part of the agreed contract and is out of scope here');
 
 test.todo('running valid-two-chars-two-stages.yaml a second time against the same installDir succeeds, exits 0, and does not duplicate the [Characters]/[ExtraStages] registration lines (select.def gains no new lines on the repeat run)');
 test.todo('running valid-two-chars-two-stages.yaml a second time re-installs/overwrites installDir/chars/<id> and installDir/stages/<id> content without leaving stale files from a prior differently-shaped version of the same id');
